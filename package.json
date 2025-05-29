@@ -9,6 +9,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1lib/mcp-server-dingtalk.git"
+  },
   "scripts": {
     "build": "vite build",
     "dev": "vite build --watch",
@@ -16,7 +20,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "kingcc",
   "license": "MIT",
   "dependencies": {
     "fastmcp": "^2.1.3",
