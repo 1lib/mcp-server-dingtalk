@@ -1,25 +1,25 @@
 {
   "name": "mcp-server-dingtalk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Model Context Protocol (MCP) server for DingTalk integration.",
-  "type": "module",
-  "main": "dist/index.mjs",
-  "module": "dist/index.mjs",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "bin": {
-    "mcp-server-dingtalk": "dist/index.mjs"
+    "mcp-server-dingtalk": "dist/index.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/1lib/mcp-server-dingtalk.git"
   },
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && chmod +x dist/*",
     "dev": "vite build --watch",
-    "start": "node dist/index.mjs",
+    "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

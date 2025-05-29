@@ -7,7 +7,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'mcp-server-dingtalk',
       fileName: 'index',
-      formats: ['es']
+      formats: ['cjs']
     },
     rollupOptions: {
       external: ['fastmcp', 'zod', 'crypto', 'node:crypto'],
@@ -17,8 +17,9 @@ export default defineConfig({
           'zod': 'z',
           'crypto': 'crypto'
         },
-        entryFileNames: 'index.mjs',
-        format: 'es'
+        entryFileNames: 'index.js',
+        format: 'cjs',
+        banner: '#!/usr/bin/env node'
       }
     },
     target: 'node18',

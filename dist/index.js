@@ -1,17 +1,21 @@
-import { FastMCP } from "fastmcp";
-import { z } from "zod";
-import crypto from "crypto";
+#!/usr/bin/env node
+"use strict";
+const fastmcp = require("fastmcp");
+const zod = require("zod");
+const crypto = require("crypto");
 const name = "mcp-server-dingtalk";
-const version = "1.0.0";
-const description = "";
-const type = "module";
-const main = "dist/index.mjs";
-const module = "dist/index.mjs";
+const version = "1.0.1";
+const description = "A Model Context Protocol (MCP) server for DingTalk integration.";
+const type = "commonjs";
+const main = "dist/index.js";
+const module$1 = "dist/index.js";
 const types = "dist/index.d.ts";
 const files = ["dist"];
-const scripts = { "build": "vite build", "dev": "vite build --watch", "start": "node dist/index.mjs", "test": 'echo "Error: no test specified" && exit 1' };
+const bin = { "mcp-server-dingtalk": "dist/index.js" };
+const repository = { "type": "git", "url": "https://github.com/1lib/mcp-server-dingtalk.git" };
+const scripts = { "build": "vite build && chmod +x dist/*", "dev": "vite build --watch", "start": "node dist/index.js", "test": 'echo "Error: no test specified" && exit 1' };
 const keywords = [];
-const author = "";
+const author = "kingcc";
 const license = "MIT";
 const dependencies = { "fastmcp": "^2.1.3", "zod": "^3.25.31" };
 const devDependencies = { "@types/node": "^22.15.23", "typescript": "5.8.3", "vite": "6.3.5" };
@@ -21,9 +25,11 @@ const packageInfo = {
   description,
   type,
   main,
-  module,
+  module: module$1,
   types,
   files,
+  bin,
+  repository,
   scripts,
   keywords,
   author,
@@ -71,29 +77,29 @@ function appendTools(server2) {
   server2.addTool({
     name: "dingtalk_bot_send_message",
     description: "send a message to a dingtalk chat via bot name",
-    parameters: z.object({
-      name: z.string().describe("bot name for send message to"),
-      message: z.object({
-        type: z.enum(["text", "link", "markdown", "actionCard", "feedCard"]).describe("message type to send"),
-        content: z.string().optional(),
-        text: z.string().optional(),
-        title: z.string().optional(),
-        picUrl: z.string().optional(),
-        messageUrl: z.string().optional(),
-        btnOrientation: z.enum(["0", "1"]).optional(),
-        singleTitle: z.string().optional(),
-        singleURL: z.string().optional(),
-        btns: z.array(
-          z.object({
-            title: z.string(),
-            actionURL: z.string()
+    parameters: zod.z.object({
+      name: zod.z.string().describe("bot name for send message to"),
+      message: zod.z.object({
+        type: zod.z.enum(["text", "link", "markdown", "actionCard", "feedCard"]).describe("message type to send"),
+        content: zod.z.string().optional(),
+        text: zod.z.string().optional(),
+        title: zod.z.string().optional(),
+        picUrl: zod.z.string().optional(),
+        messageUrl: zod.z.string().optional(),
+        btnOrientation: zod.z.enum(["0", "1"]).optional(),
+        singleTitle: zod.z.string().optional(),
+        singleURL: zod.z.string().optional(),
+        btns: zod.z.array(
+          zod.z.object({
+            title: zod.z.string(),
+            actionURL: zod.z.string()
           })
         ).optional(),
-        links: z.array(
-          z.object({
-            title: z.string(),
-            messageURL: z.string(),
-            picURL: z.string()
+        links: zod.z.array(
+          zod.z.object({
+            title: zod.z.string(),
+            messageURL: zod.z.string(),
+            picURL: zod.z.string()
           })
         ).optional()
       }).describe(`message to send.
@@ -135,16 +141,16 @@ interface FeedCardMessage {
   }>; // array of links
 }
         `),
-      notify: z.object({
-        atMobiles: z.array(z.string()).optional().describe("mobile numbers to notify"),
-        atUserIds: z.array(z.string()).optional().describe("user IDs to notify"),
-        isAtAll: z.boolean().optional().describe("whether to notify all users")
+      notify: zod.z.object({
+        atMobiles: zod.z.array(zod.z.string()).optional().describe("mobile numbers to notify"),
+        atUserIds: zod.z.array(zod.z.string()).optional().describe("user IDs to notify"),
+        isAtAll: zod.z.boolean().optional().describe("whether to notify all users")
       })
     }),
     execute: sendMessage
   });
 }
-const server = new FastMCP(packageInfo);
+const server = new fastmcp.FastMCP(packageInfo);
 appendTools(server);
 server.start({
   transportType: "stdio"
