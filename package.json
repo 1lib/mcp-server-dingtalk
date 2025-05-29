@@ -2,7 +2,7 @@
   "name": "mcp-server-dingtalk",
   "version": "1.0.2",
   "description": "A Model Context Protocol (MCP) server for DingTalk integration.",
-  "type": "commonjs",
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "url": "https://github.com/1lib/mcp-server-dingtalk.git"
   },
   "scripts": {
-    "build": "tsc && chmod +x dist/*.js",
+    "build": "tsc --skipLibCheck && chmod +x dist/*.js",
     "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
