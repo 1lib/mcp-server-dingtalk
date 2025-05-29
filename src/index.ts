@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import packageInfo from "../package.json"
+import packageInfo from "../package.json" with { type: "json" }
 import { FastMCP as MCPServer } from "fastmcp"
 
 import { tools } from "./bot.js"
