@@ -17,9 +17,8 @@
     "url": "https://github.com/1lib/mcp-server-dingtalk.git"
   },
   "scripts": {
-    "build": "vite build && chmod +x dist/*",
-    "dev": "vite build --watch",
-    "start": "node dist/index.js",
+    "build": "tsc && chmod +x dist/*.js",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -31,7 +30,6 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.23",
-    "typescript": "5.8.3",
-    "vite": "6.3.5"
+    "typescript": "5.8.3"
   }
 }

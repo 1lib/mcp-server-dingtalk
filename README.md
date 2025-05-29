@@ -7,13 +7,11 @@ A Model Context Protocol (MCP) server for DingTalk integration.
 - 🤖 DingTalk bot message sending capabilities
 - 📦 Multiple message types support (text, link, markdown, actionCard, feedCard)
 - 🔐 Secure webhook signing with HMAC-SHA256
-- ⚡ Built with Vite for fast development and optimized production builds
 - 🎯 TypeScript support with strict type checking
 
 ## Prerequisites
 
 - Node.js 18+
-- pnpm (recommended) or npm
 
 ## Usage
 

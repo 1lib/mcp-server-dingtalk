@@ -212,8 +212,7 @@ async function sendMessage({ name, message, notify }: { name: string, message: M
   };
 }
 
-export function appendTools(server) {
-  server.addTool({
+export const tools = [{
     name: 'dingtalk_bot_send_message',
     description: 'send a message to a dingtalk chat via bot name',
     parameters: z.object({
@@ -299,5 +298,4 @@ interface FeedCardMessage {
       }),
     }),
     execute: sendMessage,
-  });
-}
+  }];

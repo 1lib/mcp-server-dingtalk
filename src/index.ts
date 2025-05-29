@@ -1,11 +1,14 @@
+#!/usr/bin/env node
 import packageInfo from "../package.json"
 import { FastMCP as MCPServer } from "fastmcp"
 
-import { appendTools as appendBotTools } from "./bot"
+import { tools } from "./bot"
 
 const server = new MCPServer(packageInfo as any)
 
-appendBotTools(server)
+for (const tool of tools) {
+  server.addTool(tool as any)
+}
 
 server.start({
   transportType: "stdio",
