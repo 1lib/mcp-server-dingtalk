@@ -1,6 +1,6 @@
 {
   "name": "mcp-server-dingtalk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Model Context Protocol (MCP) server for DingTalk integration.",
   "type": "module",
   "main": "dist/index.mjs",
@@ -9,6 +9,9 @@
   "files": [
     "dist"
   ],
+  "bin": {
+    "mcp-server-dingtalk": "dist/index.mjs"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/1lib/mcp-server-dingtalk.git"
