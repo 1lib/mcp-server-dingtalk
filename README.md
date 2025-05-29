@@ -19,14 +19,17 @@ A Model Context Protocol (MCP) server for DingTalk integration.
 
 ```json
 {
-  'mcp-server-dingtalk': {
-    transport: 'stdio',
-    command: 'npx',
-    args: ['-y', 'mcp-server-dingtalk'],
-    env: {
-      DINGTALK_BOT_CONFIGS: '[{"name": "your-bot-name", "accessToken": "your-access-token", "signSecret": "your-sign-secret"}]'
+    "mcp-server-dingtalk": {
+        "transport": "stdio",
+        "command": "npx",
+        "args": [
+            "-y",
+            "mcp-server-dingtalk"
+        ],
+        "env": {
+            "DINGTALK_BOT_CONFIGS": "[{\"name\": \"your-bot-name\", \"accessToken\": \"your-access-token\", \"signSecret\": \"your-sign-secret\"}]"
+        }
     }
-  },
 }
 ```
 
