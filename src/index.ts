@@ -2,7 +2,7 @@
 import packageInfo from "../package.json"
 import { FastMCP as MCPServer } from "fastmcp"
 
-import { tools } from "./bot"
+import { tools } from "./bot.js"
 
 const server = new MCPServer(packageInfo as any)
 

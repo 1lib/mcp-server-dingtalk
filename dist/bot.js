@@ -1,11 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.tools = void 0;
-const zod_1 = require("zod");
-const crypto_1 = __importDefault(require("crypto"));
+import { z } from 'zod';
+import crypto from 'crypto';
 function getUrl(name) {
     const url = process.env.DINGTALK_BASE_URL ?? 'https://oapi.dingtalk.com/robot/send';
     const botConfigs = JSON.parse(process.env.DINGTALK_BOT_CONFIGS ?? '[]');
@@ -17,7 +11,7 @@ function getUrl(name) {
     if (signSecret) {
         const timestamp = Date.now();
         const stringToSign = `${timestamp}\n${signSecret}`;
-        const hmac = crypto_1.default.createHmac('sha256', signSecret);
+        const hmac = crypto.createHmac('sha256', signSecret);
         const sign = encodeURIComponent(hmac.update(stringToSign).digest('base64'));
         return `${url}?access_token=${accessToken}&timestamp=${timestamp}&sign=${sign}`;
     }
@@ -41,34 +35,34 @@ async function sendMessage({ name, message, notify }) {
         content: [{ type: "text", text: `send message to dingtalk bot [name=${name}] with result=${JSON.stringify(result)}` }],
     };
 }
-exports.tools = [{
+export const tools = [{
         name: 'dingtalk_bot_send_message',
         description: 'send a message to a dingtalk chat via bot name',
-        parameters: zod_1.z.object({
-            name: zod_1.z.string().describe('bot name for send message to'),
-            message: zod_1.z.object({
-                type: zod_1.z
+        parameters: z.object({
+            name: z.string().describe('bot name for send message to'),
+            message: z.object({
+                type: z
                     .enum(['text', 'link', 'markdown', 'actionCard', 'feedCard'])
                     .describe('message type to send'),
-                content: zod_1.z.string().optional(),
-                text: zod_1.z.string().optional(),
-                title: zod_1.z.string().optional(),
-                picUrl: zod_1.z.string().optional(),
-                messageUrl: zod_1.z.string().optional(),
-                btnOrientation: zod_1.z.enum(['0', '1']).optional(),
-                singleTitle: zod_1.z.string().optional(),
-                singleURL: zod_1.z.string().optional(),
-                btns: zod_1.z
-                    .array(zod_1.z.object({
-                    title: zod_1.z.string(),
-                    actionURL: zod_1.z.string(),
+                content: z.string().optional(),
+                text: z.string().optional(),
+                title: z.string().optional(),
+                picUrl: z.string().optional(),
+                messageUrl: z.string().optional(),
+                btnOrientation: z.enum(['0', '1']).optional(),
+                singleTitle: z.string().optional(),
+                singleURL: z.string().optional(),
+                btns: z
+                    .array(z.object({
+                    title: z.string(),
+                    actionURL: z.string(),
                 }))
                     .optional(),
-                links: zod_1.z
-                    .array(zod_1.z.object({
-                    title: zod_1.z.string(),
-                    messageURL: zod_1.z.string(),
-                    picURL: zod_1.z.string(),
+                links: z
+                    .array(z.object({
+                    title: z.string(),
+                    messageURL: z.string(),
+                    picURL: z.string(),
                 }))
                     .optional(),
             }).describe(`message to send.
@@ -110,16 +104,16 @@ interface FeedCardMessage {
   }>; // array of links
 }
         `),
-            notify: zod_1.z.object({
-                atMobiles: zod_1.z
-                    .array(zod_1.z.string())
+            notify: z.object({
+                atMobiles: z
+                    .array(z.string())
                     .optional()
                     .describe('mobile numbers to notify'),
-                atUserIds: zod_1.z
-                    .array(zod_1.z.string())
+                atUserIds: z
+                    .array(z.string())
                     .optional()
                     .describe('user IDs to notify'),
-                isAtAll: zod_1.z.boolean().optional().describe('whether to notify all users'),
+                isAtAll: z.boolean().optional().describe('whether to notify all users'),
             }),
         }),
         execute: sendMessage,
